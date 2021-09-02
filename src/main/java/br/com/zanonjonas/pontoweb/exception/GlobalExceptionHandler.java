@@ -24,7 +24,7 @@ public class GlobalExceptionHandler {
 	 * @param ex      The target exception
 	 * @param request The current request
 	 */
-	@ExceptionHandler({ PontoWebBaseHttpException.class, EmptyIdHttpException.class, UserNotFoundHttpException.class })
+	@ExceptionHandler({ PontoWebBaseHttpException.class, EmptyIdHttpException.class, NotFoundHttpException.class })
 	@Nullable
 	public final ResponseEntity<ApiError> handleException(Exception ex, WebRequest request) {
 		HttpHeaders headers = new HttpHeaders();

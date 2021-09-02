@@ -8,7 +8,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Component;
 
 import br.com.zanonjonas.pontoweb.exception.EmptyIdHttpException;
-import br.com.zanonjonas.pontoweb.exception.UserNotFoundHttpException;
+import br.com.zanonjonas.pontoweb.exception.NotFoundHttpException;
 import br.com.zanonjonas.pontoweb.model.User;
 import br.com.zanonjonas.pontoweb.repository.UserRepository;
 
@@ -22,12 +22,12 @@ public class UserService {
 		return userRepository.findAll();
 	}
 
-	public User findById(Long id) throws UserNotFoundHttpException {
-		Optional<User> optUser = userRepository.findById(id);
-		if (optUser.isEmpty()) {
-			throw new UserNotFoundHttpException(String.format("User id %d not found", id));
+	public User findById(Long id) throws NotFoundHttpException {
+		Optional<User> opt = userRepository.findById(id);
+		if (opt.isEmpty()) {
+			throw new NotFoundHttpException(String.format("User id %d not found", id));
 		}
-		return optUser.get();
+		return opt.get();
 	}
 
 	public User saveUser(User user) throws EmptyIdHttpException {
@@ -41,11 +41,11 @@ public class UserService {
 		return userRepository.save(newUser);
 	}
 
-	public void deleteById(Long id) throws UserNotFoundHttpException {
+	public void deleteById(Long id) throws NotFoundHttpException {
 		try {
 			userRepository.deleteById(id);
 		} catch (EmptyResultDataAccessException e) {
-			throw new UserNotFoundHttpException(String.format("User id %d not found", id));
+			throw new NotFoundHttpException(String.format("User id %d not found", id));
 		}
 
 	}
