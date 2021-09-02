@@ -11,34 +11,33 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import lombok.Data;
+
+@Data
+
 @Entity
 public class Clock {
 	@Column
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	@Column
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "id")
-	private User user;
+	@JoinColumn(name = "userId")
+	private User theUser;
 
 	@Column
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime clockIn;
 
 	@Column
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
 	private LocalDateTime clockOut;
 
-	public Clock() {
-
-	}
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+	public User getUser() {
+		return theUser;
 	}
 
 }

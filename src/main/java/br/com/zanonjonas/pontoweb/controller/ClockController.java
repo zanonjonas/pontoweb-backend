@@ -22,28 +22,28 @@ public class ClockController {
 	@Autowired
 	private ClockService clockService;
 
-	@GetMapping("/clock/{id}/clock")
+	@GetMapping("/user/clock")
 	public List<Clock> findAll() {
 		return clockService.findAll();
 	}
 
-	@GetMapping("/clock/{id}")
+	@GetMapping("/user/clock/{id}")
 	public Clock findById(@PathVariable(required = false) Long id) throws Exception {
 		return clockService.findById(id);
 	}
 
-	@PostMapping("/clock")
+	@PostMapping("/user/clock")
 	@ResponseStatus(HttpStatus.CREATED)
 	public Clock createClock(@RequestBody Clock newClock) {
 		return clockService.createClock(newClock);
 	}
 
-	@PatchMapping("/clock")
+	@PatchMapping("/user/{userid}/clock")
 	public Clock saveClock(@RequestBody Clock clock) throws Exception {
 		return clockService.saveClock(clock);
 	}
 
-	@DeleteMapping("/clock/{id}")
+	@DeleteMapping("/user/{userid}/clock/{id}")
 	public void deleteClock(@PathVariable(required = true) Long id) throws Exception {
 		clockService.deleteById(id);
 	}

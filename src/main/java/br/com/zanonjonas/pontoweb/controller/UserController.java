@@ -18,7 +18,7 @@ import br.com.zanonjonas.pontoweb.service.UserService;
 
 @RestController
 public class UserController {
-	
+
 	@Autowired
 	private UserService userService;
 
@@ -26,28 +26,26 @@ public class UserController {
 	public List<User> findAllUsers() {
 		return userService.findAll();
 	}
-	
+
 	@GetMapping("/user/{id}")
-	public User findById(@PathVariable (required = false) Long id) throws Exception{
+	public User findById(@PathVariable(required = false) Long id) throws Exception {
 		return userService.findById(id);
 	}
-	
+
 	@PostMapping("/user")
 	@ResponseStatus(HttpStatus.CREATED)
 	public User createUser(@RequestBody User newUser) {
 		return userService.createUser(newUser);
 	}
-	
+
 	@PatchMapping("/user")
 	public User saveUser(@RequestBody User user) throws Exception {
 		return userService.saveUser(user);
 	}
-	
+
 	@DeleteMapping("/user/{id}")
-	public void deleteUser(@PathVariable (required = true) Long id) throws Exception {
+	public void deleteUser(@PathVariable(required = true) Long id) throws Exception {
 		userService.deleteById(id);
 	}
-	
-	
-	
+
 }

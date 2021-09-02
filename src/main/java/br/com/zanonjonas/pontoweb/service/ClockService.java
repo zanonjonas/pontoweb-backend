@@ -11,12 +11,15 @@ import br.com.zanonjonas.pontoweb.exception.EmptyIdHttpException;
 import br.com.zanonjonas.pontoweb.exception.NotFoundHttpException;
 import br.com.zanonjonas.pontoweb.model.Clock;
 import br.com.zanonjonas.pontoweb.repository.ClockRepository;
+import br.com.zanonjonas.pontoweb.repository.UserRepository;
 
 @Component
 public class ClockService {
 
 	@Autowired
 	private ClockRepository clockRepository;
+	@Autowired
+	private UserRepository userRepository;
 
 	public List<Clock> findAll() {
 		return clockRepository.findAll();

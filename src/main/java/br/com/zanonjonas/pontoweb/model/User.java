@@ -15,11 +15,17 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import br.com.zanonjonas.pontoweb.enums.UserType;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.Getter;
+
+@Data
 
 @Entity
 @Table(name = "Users")
 public class User {
 	@Column
+	@Getter(AccessLevel.NONE)
 	private Long id;
 
 	@Column
@@ -30,14 +36,11 @@ public class User {
 
 	@Column
 	@Enumerated(EnumType.STRING)
+	@Getter(AccessLevel.NONE)
 	private UserType type;
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
 	private Set<Clock> clock;
-
-	public User() {
-
-	}
 
 	public User(Long id, String name, String login, UserType type) {
 		super();
@@ -57,22 +60,6 @@ public class User {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getLogin() {
-		return login;
-	}
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
 	@Enumerated(EnumType.STRING)
 	public UserType getType() {
 		return type;
@@ -81,10 +68,4 @@ public class User {
 	public void setType(UserType type) {
 		this.type = type;
 	}
-
-	@Override
-	public String toString() {
-		return "User [uuid=" + id + ", name=" + name + ", login=" + login + "]";
-	}
-
 }
